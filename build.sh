@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#Define Paths
+dir=${HOME}/Hima-M9/
+dest=${HOME}/Output/
+
 VER="LeeDrOiD-Hima-V4.0.0"
 
 DATE_START=$(date +"%s")
@@ -30,4 +34,4 @@ echo
 #Kernel build END
 #Find modules and kernel image then move to Output
 find "$dir" -name "*.ko" -exec cp -v {} $dest \; -printf "Found .ko Module\n"
-mv ~/Hima-M9/arch/arm64/boot/Image.gz "$dest"
+mv ~/Hima-M9/arch/arm64/boot/image.gz "$dest"
