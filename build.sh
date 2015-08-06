@@ -5,7 +5,7 @@ dir=${HOME}/Hima-M9/
 dest=${HOME}/Output/
 
 #Kernel build START
-VER="LeeDrOiD-M9-V4"
+VER="LeeDrOiD-Hima-V4"
 
 DATE_START=$(date +"%s")
 export LOCALVERSION="-"`echo $VER`
@@ -15,10 +15,11 @@ export CROSS_COMPILE=/home/lee/toolchains/aarch64-linux-android-4.9/bin/aarch64-
 
 make "leedroid_defconfig"
 
-make -j4
+make -j8
 
 #in kernel folder
 dtbTool -o dt.img -s 4096 -p scripts/dtc/ arch/arm/boot/dts/
+
 
 DATE_END=$(date +"%s")
 DIFF=$(($DATE_END - $DATE_START))
@@ -33,12 +34,9 @@ else
 fi
 echo "  Finish time: $(date +"%r")"
 echo
-#Kernel build END
 
-#Find modules and extract them to Desktop/modules
-mkdir ${HOME}/Output/
+#Kernel build END
+#Find modules and kernel image then move to Output
 find "$dir" -name "*.ko" -exec cp -v {} $dest \; -printf "Found .ko Module\n"
 mv dt.img ../Output/
 cp arch/arm64/boot/Image ../Output/
-
-
